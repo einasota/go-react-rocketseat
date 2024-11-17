@@ -1,15 +1,17 @@
 package main
 
 import (
+	"log"
 	"os/exec"
 
 	"github.com/joho/godotenv"
 )
 
-func main(){
+func main() {
 	if err := godotenv.Load(); err != nil {
 		panic(err)
 	}
+
 	cmd := exec.Command(
 		"tern",
 		"migrate",
@@ -19,6 +21,6 @@ func main(){
 		"./internal/store/pgstore/migrations/tern.conf",
 	)
 	if err := cmd.Run(); err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 }
